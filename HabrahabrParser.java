@@ -18,8 +18,6 @@ public class HabrahabrParser {
                         .split("</h3>");
 
 
-
-
                 for (int index = 0; index < title.length; index++) {
                     int cutPoint = title[index].lastIndexOf(">") + 1;
                     title[index] = title[index].substring(cutPoint);
