@@ -12,10 +12,7 @@ public class HabrahabrParserwithStream {
     public static void main(String[] args) {
 
         IntStream.range(1, 4)
-                .mapToObj(s -> {
-
-                    return "https://m.habrahabr.ru/page" + s + "/";
-                })
+                .mapToObj(s ->  "https://m.habrahabr.ru/page" + s + "/")
                 .map(HabrahabrParserwithStream::habrahabrGet)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
