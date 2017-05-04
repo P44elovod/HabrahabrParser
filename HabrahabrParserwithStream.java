@@ -16,9 +16,10 @@ public class HabrahabrParserwithStream {
 
                     return "https://m.habrahabr.ru/page" + s + "/";
                 })
-                .map(s -> (habrahabrGet(s))
+                .map(HabrahabrParserwithStream::habrahabrGet)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
 
-                )
                 .map(s -> (s
                         .select("h3")
                         .toString()
@@ -34,11 +35,11 @@ public class HabrahabrParserwithStream {
 
     }
 
-    public static Document habrahabrGet(String s) {
-        Document doc = getNull().orElse(null);
+    public static Optional<Document> habrahabrGet(String url) {
+        Optional<Document> doc = Optional.empty();
         try {
-            doc = Jsoup.connect(s)
-                    .get();
+            doc = Optional.of(Jsoup.connect(url)
+                    .get());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,8 +47,5 @@ public class HabrahabrParserwithStream {
 
     }
 
-    public static Optional<Document> getNull() {
-        return Optional.empty();
-    }
 
 }
